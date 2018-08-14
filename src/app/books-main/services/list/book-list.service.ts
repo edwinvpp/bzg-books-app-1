@@ -24,8 +24,10 @@ export class BookListService {
     this.bookList.next({ kind: "", totalItems: 0, items: [] });
     authFire.authState.subscribe(
       user => {
-        this.user = user;
-        this.favsRef = rdb.list('favorites/' + this.user.uid);
+        if(user) {
+          this.user = user;
+          this.favsRef = rdb.list('favorites/' + this.user.uid);
+        }        
       }
     )
   }
